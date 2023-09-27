@@ -34,7 +34,7 @@ public class piece : MonoBehaviour
         realRotation += 90;
 
         if (realRotation == 360) 
-            realRotation = 0;
+            
 
         RotateValues();
     }
