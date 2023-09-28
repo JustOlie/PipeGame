@@ -91,6 +91,30 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public int QuickSweep(int w,int h)
+    {
+        int value = 0;
+        //Compare top
+        if(h !=puzzle.height - 1)
+            if (puzzle.pieces[w,h].values[0] == 1 && puzzle.pieces[w,h + 1].values[2] == 1)
+                value++;
+
+        //Compare right
+        if (w != puzzle.width - 1)
+            if (puzzle.pieces[w, h].values[1] == 1 && puzzle.pieces[w, h + 1].values[3] == 1)
+                value++;
+        //Compare left
+        if(w != 0)
+            if (puzzle.pieces[w, h].values[3] == 1 && puzzle.pieces[w-1, h].values[1]==1)
+                value++;
+        //Compare bottom
+        if (h != 0)
+            if (puzzle.pieces[w, h].values[2] == 1 && puzzle.pieces[w, h-1].values[0] == 1)
+                value++;
+
+        return value;
+    }
+
     int GetWinValue()
     {
 
