@@ -9,10 +9,12 @@ public class piece : MonoBehaviour
     public float speed;
     float realRotation;
 
+    public GameManager gm;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -27,14 +29,13 @@ public class piece : MonoBehaviour
 
         RotatePiece();
 
+        gm.puzzle.curValue = gm.Sweep();
+
     }
 
     public void RotatePiece()
     {
         realRotation += 90;
-
-        if (realRotation == 360) 
-            
 
         RotateValues();
     }
