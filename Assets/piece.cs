@@ -28,13 +28,19 @@ public class piece : MonoBehaviour
     {
         int difference = -gm.QuickSweep((int)transform.position.x, (int)transform.position.y);
 
+
+
         RotatePiece();
+
 
         difference += gm.QuickSweep((int)transform.position.x, (int)transform.position.y);
 
 
 
+
         gm.puzzle.curValue += difference;
+
+
 
         if (gm.puzzle.curValue == gm.puzzle.winValue)
             gm.Win();

@@ -1,10 +1,15 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
 
+    public GameObject canvas;
+
     [System.Serializable]
+
+
     public class Puzzle
     {
 
@@ -24,6 +29,8 @@ public class GameManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
+        canvas.SetActive(false);
 
 
         Vector2 dimensions = CheckDimensions();
@@ -90,30 +97,44 @@ public class GameManager : MonoBehaviour
         return value;
 
     }
+    public void Win()
+    {
+        canvas.SetActive (true);
 
-    public int QuickSweep(int w,int h)
+    }
+
+
+    public int QuickSweep(int w, int h)
     {
         int value = 0;
-        //Compare top
-        if(h !=puzzle.height - 1)
-            if (puzzle.pieces[w,h].values[0] == 1 && puzzle.pieces[w,h + 1].values[2] == 1)
+
+        //compares top
+        if (h != puzzle.height - 1)
+            if (puzzle.pieces[w, h].values[0] == 1 && puzzle.pieces[w, h + 1].values[2] == 1)
                 value++;
 
-        //Compare right
+
+        //compare right
         if (w != puzzle.width - 1)
-            if (puzzle.pieces[w, h].values[1] == 1 && puzzle.pieces[w, h + 1].values[3] == 1)
+            if (puzzle.pieces[w, h].values[1] == 1 && puzzle.pieces[w + 1, h].values[3] == 1)
                 value++;
-        //Compare left
-        if(w != 0)
-            if (puzzle.pieces[w, h].values[3] == 1 && puzzle.pieces[w-1, h].values[1]==1)
+
+
+        //compare left
+        if (w != 0)
+            if (puzzle.pieces[w, h].values[3] == 1 && puzzle.pieces[w - 1, h].values[1] == 1)
                 value++;
-        //Compare bottom
+
+        //compare bottom
         if (h != 0)
-            if (puzzle.pieces[w, h].values[2] == 1 && puzzle.pieces[w, h-1].values[0] == 1)
+            if (puzzle.pieces[w, h].values[2] == 1 && puzzle.pieces[w, h - 1].values[0] == 1)
                 value++;
+
 
         return value;
+
     }
+
 
     int GetWinValue()
     {
@@ -180,6 +201,14 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+
+    public void NextLevel(string nextLevel)
+    {
+
+        SceneManager.LoadScene(nextLevel);
 
     }
 }
